@@ -1,8 +1,8 @@
-// kanban-app-tutorial/src/app/components/Navbar.tsx
+'use client' 
 
 import Dropdown from "./Dropdown";
 import { useState, useEffect } from 'react';
-import { setPageTitle, getPageTitle } from '../../redux/features/appSlice'; // Update import to use setPageTitle
+import { setPageTitle, getPageTitle } from '../../redux/features/appSlice';
 import { useAppDispatch, useAppSelector } from '@/components/redux/hooks';
 import { useFetchDataFromDbQuery } from "@/components/redux/services/apiSlice";
 
@@ -13,12 +13,12 @@ export default function Navbar() {
 
    useEffect(() => {
       if (data) {
-         const activeBoard = data[0].boards[0];
-         dispatch(setPageTitle(activeBoard.name)); // Dispatch setPageTitle instead of setCurrentBoardName
+      const activeBoard = data[0].boards[0];
+      dispatch(setPageTitle(activeBoard.name));
       }
-   }, [data]);
+   }, [data, dispatch]);
 
-   const currentBoardName = useAppSelector(getPageTitle); // Update to use getPageTitle
+   const currentBoardName = useAppSelector(getPageTitle);
 
    return (
       <nav className="bg-white border flex h-24">
@@ -31,13 +31,13 @@ export default function Navbar() {
 
             <div className="flex items-center space-x-3">
                <button className="bg-blue-500 text-black px-4 py-2 flex rounded-3xl items-center space-x-2">
-                  <p>+ Add New Task</p>
+               <p>+ Add New Task</p>
                </button>
                <div className="relative flex items-center">
-                  <button onClick={() => setShow(!show)} className="text-3xl mb-4">
-                     ...
-                  </button>
-                  <Dropdown show={show} />
+               <button onClick={() => setShow(!show)} className="text-3xl mb-4">
+                  ...
+               </button>
+               <Dropdown show={show} />
                </div>
             </div>
          </div>
